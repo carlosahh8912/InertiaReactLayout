@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UsuarioController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -14,17 +15,20 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/test', function () {
-    return Inertia::render('Dashboard');
-})->name('test');
+Route::middleware(['auth', 'verified'])->group(function () {
 
-Route::get('/empresa', function () {
-    return Inertia::render('Empresa/Index');
-})->name('empresa');
+    Route::get('/dashboard', function () {
+        return Inertia::render('Dashboard');
+    })->name('dashboard');
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+    Route::get('usuarios/usuarios', [UsuarioController::class, "index"])->name('usuarios.index');
+
+    Route::get('/test', function () {
+        return Inertia::render('Dashboard');
+    })->name('test');
+
+});
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -32,4 +36,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

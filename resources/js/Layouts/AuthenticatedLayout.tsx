@@ -22,7 +22,7 @@ export default function Authenticated({
             <SidebarInset>
                 <Navbar />
                 <ScrollArea>
-                    <div className="h-full w-full p-7">{children}</div>
+                    <div className="flex-1 space-y-4 p-8 pt-6">{children}</div>
                 </ScrollArea>
             </SidebarInset>
         </SidebarProvider>

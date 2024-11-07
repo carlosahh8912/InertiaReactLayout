@@ -93,7 +93,7 @@ const UserButton = ({ sidebar = false }: { sidebar: boolean }) => {
                 </DropdownMenuGroup>
                 <DropdownMenuSeparator />
                 <DropdownMenuGroup>
-                    <DropdownMenuItem>
+                    <DropdownMenuItem asChild className="cursor-pointer">
                         <Link href={route("profile.edit")} className="flex items-center w-full">
                         <User />
                         Perfil
@@ -117,7 +117,7 @@ const UserButton = ({ sidebar = false }: { sidebar: boolean }) => {
                         as="button"
                     >
                         <LogOut />
-                        Log out
+                        Salir
                     </Link>
                 </DropdownMenuItem>
             </DropdownMenuContent>

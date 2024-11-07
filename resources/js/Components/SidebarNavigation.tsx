@@ -1,4 +1,4 @@
-import { ChevronRight, Cog, LayoutDashboard, Users } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import { ScrollArea } from "./ui/scroll-area";
 import {
     SidebarContent,
@@ -19,56 +19,18 @@ import {
 } from "./ui/collapsible";
 
 import { Link } from "@inertiajs/react";
-
-const menu: any = [
-    {
-        title: "Inicio",
-        items: [
-            {
-                title: "Dashboard",
-                icon: LayoutDashboard,
-                href: "dashboard",
-            },
-            {
-                title: "Usuarios",
-                icon: Users,
-                href: "profile.edit",
-            },
-        ],
-    },
-    {
-        title: "Configuración",
-        items: [
-            {
-                title: "Configuración",
-                icon: Cog,
-                items: [
-                    {
-                        title: "Empresa",
-                        href: "empresa",
-                    },
-                    {
-                        title: "Facturas",
-                        href: "test",
-                    },
-                ],
-            },
-        ],
-    },
-];
+import { Menu, MenuProps } from "@/Utils/NavigationLinks";
 
 const SidebarNavigation = () => {
-    console.log(route().current());
-
     return (
         <SidebarContent>
             <ScrollArea>
-                {menu.map((sub: any) => (
+                {Menu.map((sub: MenuProps) => (
                     <SidebarGroup key={sub.title}>
                         <SidebarGroupLabel>{sub.title}</SidebarGroupLabel>
                         <SidebarMenu>
-                            {sub.items.map((item: any) => {
-                                let isActive = false;
+                            {sub.items.map((item) => {
+                                let isActive: boolean | undefined = false;
 
                                 if (item.items) {
                                     const currentRoute = item.items.find(
@@ -95,8 +57,9 @@ const SidebarNavigation = () => {
                                                     {item.icon && (
                                                         <item.icon
                                                             className={
-                                                                isActive &&
-                                                                "dark:text-green-400 text-green-600"
+                                                                isActive
+                                                                    ? "dark:text-green-400 text-green-600"
+                                                                    : ""
                                                             }
                                                         />
                                                     )}
@@ -155,8 +118,8 @@ const SidebarNavigation = () => {
                                                         className={
                                                             route().current(
                                                                 item.href
-                                                            ) &&
-                                                            "dark:text-green-400 text-green-600"
+                                                            ) ?
+                                                            "dark:text-green-400 text-green-600" : ""
                                                         }
                                                     />
                                                 )}
