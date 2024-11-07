@@ -14,6 +14,14 @@ Route::get('/', function () {
     ]);
 });
 
+Route::get('/test', function () {
+    return Inertia::render('Dashboard');
+})->name('test');
+
+Route::get('/empresa', function () {
+    return Inertia::render('Empresa/Index');
+})->name('empresa');
+
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
