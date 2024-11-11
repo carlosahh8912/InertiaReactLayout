@@ -33,9 +33,9 @@ const UserButton = ({ sidebar = false }: { sidebar: boolean }) => {
                         size="lg"
                         className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
                     >
-                        <Avatar className="h-10 w-10 border border-neutral-300 dark:border-neutral-700">
+                        <Avatar className="h-8 w-8 rounded-lg dark:bg-blue-800">
                             <AvatarImage src={user.avatar} alt={user.name} />
-                            <AvatarFallback className="bg-neutral-200 text-xl font-medium text-neutral-500 dark:bg-neutral-700 flex items-center justify-center">
+                            <AvatarFallback className="rounded-lg text-xl text-neutral-500 font-medium bg-neutral-200 dark:text-white dark:bg-blue-700">
                                 {avatarFallback}
                             </AvatarFallback>
                         </Avatar>
@@ -51,9 +51,9 @@ const UserButton = ({ sidebar = false }: { sidebar: boolean }) => {
                     </SidebarMenuButton>
                 ) : (
                     <div className="cursor-pointer">
-                        <Avatar className="h-10 w-10 border border-neutral-300 dark:border-neutral-700">
+                        <Avatar className="h-10 w-10 border border-neutral-300 dark:border-blue-700">
                             <AvatarImage src={user.avatar} alt={user.name} />
-                            <AvatarFallback className="bg-neutral-200 text-xl font-medium text-neutral-500 dark:bg-neutral-700 flex items-center justify-center">
+                            <AvatarFallback className="bg-neutral-200 text-xl font-medium dark:text-white text-neutral-500 dark:bg-blue-700 flex items-center justify-center">
                                 {avatarFallback}
                             </AvatarFallback>
                         </Avatar>
@@ -68,9 +68,9 @@ const UserButton = ({ sidebar = false }: { sidebar: boolean }) => {
             >
                 <DropdownMenuLabel className="p-0 font-normal">
                     <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-                        <Avatar className="h-10 w-10 border border-neutral-300 dark:border-neutral-700">
+                        <Avatar className="h-10 w-10 border border-neutral-300 dark:border-blue-700">
                             <AvatarImage src={user.avatar} alt={user.name} />
-                            <AvatarFallback className="bg-neutral-200 text-xl font-medium text-neutral-500 dark:bg-neutral-700 flex items-center justify-center">
+                            <AvatarFallback className="bg-neutral-200 text-xl dark:text-white font-medium text-neutral-500 dark:bg-blue-700 flex items-center justify-center">
                                 {avatarFallback}
                             </AvatarFallback>
                         </Avatar>

@@ -12,7 +12,7 @@ import UserButton from "./UserButton";
 
 const SidebarLayout = () => {
     return (
-        <Sidebar variant="inset">
+        <Sidebar collapsible="icon" variant="inset">
             <SidebarHeader>
                 <SidebarMenu>
                     <SidebarMenuItem>
