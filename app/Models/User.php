@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Hash;
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable, HasUuids, SoftDeletes, HasRoles;
+    use HasFactory, Notifiable, HasRoles, HasUuids, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
