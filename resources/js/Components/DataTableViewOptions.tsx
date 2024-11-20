@@ -10,7 +10,8 @@ import {
   DropdownMenuSeparator
 } from "@/Components/ui/dropdown-menu";
 import { Button } from "@/Components/ui/button";
-import { SlidersHorizontalIcon } from "lucide-react";
+
+import { MixerHorizontalIcon } from "@radix-ui/react-icons";
 
 interface DataTableViewOptionsProps<TData> {
   table: Table<TData>;
@@ -27,12 +28,12 @@ export function DataTableViewOptions<TData>({
           size="sm"
           className="ml-auto hidden h-8 lg:flex"
         >
-          <SlidersHorizontalIcon className="mr-2 h-4 w-4" />
-          View
+          <MixerHorizontalIcon className="mr-2 h-4 w-4" />
+          Mostrar
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-[150px]">
-        <DropdownMenuLabel>Toggle columns</DropdownMenuLabel>
+        <DropdownMenuLabel>Columnas</DropdownMenuLabel>
         <DropdownMenuSeparator />
         {table
           .getAllColumns()

@@ -52,6 +52,6 @@ class DatabaseSeeder extends Seeder
             }
         }
 
-        \App\Models\User::factory(20)->create()->map(fn($user) => $user->assignRole('Vendedor'));
+        \App\Models\User::factory(200)->create()->map(fn($user) => $user->assignRole('Vendedor'));
     }
 }

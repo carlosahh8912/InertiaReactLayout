@@ -18,7 +18,7 @@ import {
     CollapsibleTrigger,
 } from "./ui/collapsible";
 
-import { Link } from "@inertiajs/react";
+import { Link, usePage } from "@inertiajs/react";
 import { Menu, MenuProps } from "@/Utils/NavigationLinks";
 
 const SidebarNavigation = () => {
@@ -118,8 +118,9 @@ const SidebarNavigation = () => {
                                                         className={
                                                             route().current(
                                                                 item.href
-                                                            ) ?
-                                                            "dark:text-green-400 text-green-600" : ""
+                                                            )
+                                                                ? "dark:text-green-400 text-green-600"
+                                                                : ""
                                                         }
                                                     />
                                                 )}

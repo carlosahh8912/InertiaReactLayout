@@ -1,5 +1,3 @@
-"use client";
-
 import * as React from "react";
 import {
     ColumnDef,
@@ -68,10 +66,10 @@ export function DataTable<TData, TValue>({
     });
 
     return (
-        <div className="space-y-4">
+        <div className="space-y-4 container">
             <DataTableToolbar table={table} />
             <div className="overflow-y-auto rounded-md border">
-                <Table>
+                <Table className="">
                     <TableHeader>
                         {table.getHeaderGroups().map((headerGroup) => (
                             <TableRow key={headerGroup.id}>
@@ -93,7 +91,7 @@ export function DataTable<TData, TValue>({
                             </TableRow>
                         ))}
                     </TableHeader>
-                    <TableBody>
+                    {/* <TableBody>
                         {table.getRowModel().rows?.length ? (
                             table.getRowModel().rows.map((row) => (
                                 <TableRow
@@ -123,12 +121,14 @@ export function DataTable<TData, TValue>({
                                 >
                                     <div className="flex items-center justify-center">
                                         <Frown className="size-8 mr-2 font-semibold" />
-                                        <span className="font-semibold text-lg">No hay resultados...</span>
+                                        <span className="font-semibold text-lg">
+                                            No hay resultados...
+                                        </span>
                                     </div>
                                 </TableCell>
                             </TableRow>
                         )}
-                    </TableBody>
+                    </TableBody> */}
                 </Table>
             </div>
             <DataTablePagination table={table} />

@@ -25,12 +25,14 @@ export interface ItemsProps {
     title: string;
     icon: LucideIcon;
     href?: any;
+    component?: any;
     items?: SubItemProps[];
 }
 
 export interface SubItemProps {
     title: string;
     href: string;
+    component?: any;
 }
 
 export const Menu = [
@@ -330,7 +332,7 @@ export const Menu = [
                     },
                     {
                         title: "Permisos",
-                        href: "test",
+                        href: "perfiles.index",
                     },
                 ],
             },

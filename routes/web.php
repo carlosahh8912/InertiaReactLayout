@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PerfilController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UsuarioController;
 use Illuminate\Support\Facades\Route;
@@ -16,11 +17,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('dashboard');
 
     Route::get('usuarios/usuarios', [UsuarioController::class, "index"])->name('usuarios.index');
+    Route::get('usuarios/usuarios/nuevo', [UsuarioController::class, "create"])->name('usuarios.create');
+    Route::delete('usuarios/usuarios/{usuario}/delete', [UsuarioController::class, "destroy"])->name('usuarios.destroy');
+
+    Route::get('usuarios/perfiles', [PerfilController::class, "index"])->name('perfiles.index');
+
 
     Route::get('/test', function () {
         return Inertia::render('Dashboard');
     })->name('test');
-
 });
 
 

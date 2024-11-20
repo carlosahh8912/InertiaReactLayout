@@ -19,6 +19,10 @@ export default function Dashboard() {
                         <div className="p-6 text-gray-900">
                             <ApplicationLogo height={102} width={200} />
                         </div>
+
+                        <div>
+
+                        </div>
                     </div>
                 </div>
             </div>

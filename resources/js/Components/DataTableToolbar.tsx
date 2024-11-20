@@ -1,5 +1,3 @@
-"use client";
-
 import { X } from "lucide-react";
 import { Table } from "@tanstack/react-table";
 
@@ -17,10 +15,18 @@ interface DataTableToolbarProps<TData> {
     table: Table<TData>;
 }
 
-const incomeType: any = [
+const DataFilter: any = [
     {
         value: "root",
         label: "Root",
+    },
+    {
+        value: "Administrador",
+        label: "Administrador",
+    },
+    {
+        value: "Vendedor",
+        label: "Vendedor",
     },
 ];
 const categories: any = [];
@@ -68,7 +74,7 @@ export function DataTableToolbar<TData>({
                     <DataTableFacetedFilter
                         column={table.getColumn("role")}
                         title="Perfil"
-                        options={incomeType}
+                        options={DataFilter}
                     />
                 )}
                 {isFiltered && (
@@ -77,7 +83,7 @@ export function DataTableToolbar<TData>({
                         onClick={() => table.resetColumnFilters()}
                         className="h-8 px-2 lg:px-3"
                     >
-                        Reset
+                        Limpiar
                         <X className="ml-2 h-4 w-4" />
                     </Button>
                 )}
@@ -93,7 +99,7 @@ export function DataTableToolbar<TData>({
                 {table.getFilteredSelectedRowModel().rows.length > 0 ? (
                     <Button variant="outline" size="sm">
                         <TrashIcon className="mr-2 size-4" aria-hidden="true" />
-                        Delete (
+                        Eliminar (
                         {table.getFilteredSelectedRowModel().rows.length})
                     </Button>
                 ) : null}

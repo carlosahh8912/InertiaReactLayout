@@ -11,21 +11,25 @@ export default function Authenticated({
     children,
 }: PropsWithChildren<{ header?: ReactNode }>) {
     const user = usePage().props.auth.user;
-    
+
     const [defaultOpen, setDefaultOpen, removeDefaultOpen] = reactUseCookie(
         "sidebar:state",
         "true"
     );
 
     return (
-        <SidebarProvider defaultOpen={JSON.parse(defaultOpen)}>
-            <Sidebar />
-            <SidebarInset>
-                <Navbar />
-                <ScrollArea>
-                    <div className="flex-1 space-y-4 p-8 pt-6">{children}</div>
-                </ScrollArea>
-            </SidebarInset>
-        </SidebarProvider>
+        <div className="min-h-screen">
+            <SidebarProvider className="" defaultOpen={JSON.parse(defaultOpen)}>
+                <Sidebar />
+                <SidebarInset>
+                    <Navbar />
+                    <ScrollArea>
+                        <main className="mx-auto max-w-screen-2xl sm:p-8 pt-6 w-full h-full">
+                            {children}
+                        </main>
+                    </ScrollArea>
+                </SidebarInset>
+            </SidebarProvider>
+        </div>
     );
 }

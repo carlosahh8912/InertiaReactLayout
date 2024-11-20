@@ -1,10 +1,12 @@
-import { Head } from "@inertiajs/react";
+import { Head, Link, useForm } from "@inertiajs/react";
 import { ColumnDef } from "@tanstack/react-table";
 
+import { useConfirm } from "@/hooks/use-confirm";
+
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
+
 import { Button } from "@/Components/ui/button";
 import { DataTable } from "@/Components/DataTable";
-import { useConfirm } from "@/hooks/use-confirm";
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -14,9 +16,13 @@ import {
     DropdownMenuTrigger,
 } from "@/Components/ui/dropdown-menu";
 import { Card, CardContent, CardHeader, CardTitle } from "@/Components/ui/card";
+import { DataTableColumnHeader } from "@/Components/DataTableColumHeader";
+import Checkbox from "@/Components/Checkbox";
 
 import { MoreHorizontalIcon, TriangleAlert } from "lucide-react";
-import { DataTableColumnHeader } from "@/Components/DataTableColumHeader";
+import { toast } from "sonner";
+import CrearUsuarioForm from "./Partials/CrearUsuarioForm";
+import { useState } from "react";
 
 interface UsuarioProps {
     id: string;
@@ -31,6 +37,14 @@ interface UsuariosIndexPageProps {
 }
 
 export default function Index({ usuarios }: UsuariosIndexPageProps) {
+    const [openModal, setOpenModal] = useState(false);
+
+    const {
+        delete: deleteUser,
+        processing: deletingUser,
+        errors: deleteErrors,
+    } = useForm();
+
     const [DeleteDialog, confirmDelete] = useConfirm(
         "Eliminar Usuario",
         "¿Seguro que quieres Eliminar este usuario?",
@@ -39,12 +53,49 @@ export default function Index({ usuarios }: UsuariosIndexPageProps) {
         "text-red-400"
     );
 
-    const handleDelete = (usuario: string) => {
-        const confirm = confirmDelete();
+    const handleDelete = async (usuario: string) => {
+        const confirm = await confirmDelete();
         if (!confirm) return;
+
+        deleteUser(route("usuarios.destroy", usuario), {
+            onSuccess: () => toast.success("El Usuario se elimino"),
+            onError: (error) => {
+                const keys = Object.keys(error);
+                const message = error[keys[0]];
+                toast.error("Error al eliminar el usuario", {
+                    description: message,
+                });
+            }
+        });
     };
 
     const ColumnsUsuario: ColumnDef<UsuarioProps>[] = [
+        // {
+        //     id: "select",
+        //     header: ({ table }) => (
+        //         <Checkbox
+        //             checked={
+        //                 table.getIsAllPageRowsSelected() ||
+        //                 (table.getIsSomePageRowsSelected() && "indeterminate")
+        //             }
+        //             onCheckedChange={(value:any) =>
+        //                 table.toggleAllPageRowsSelected(!!value)
+        //             }
+        //             aria-label="Select all"
+        //             className="translate-y-0.5"
+        //         />
+        //     ),
+        //     cell: ({ row }) => (
+        //         <Checkbox
+        //             checked={row.getIsSelected()}
+        //             onCheckedChange={(value) => row.toggleSelected(!!value)}
+        //             aria-label="Select row"
+        //             className="translate-y-0.5"
+        //         />
+        //     ),
+        //     enableSorting: false,
+        //     enableHiding: false,
+        // },
         {
             accessorKey: "name",
             header: ({ column }) => (
@@ -53,11 +104,15 @@ export default function Index({ usuarios }: UsuariosIndexPageProps) {
         },
         {
             accessorKey: "email",
-            header: "Correo",
+            header: ({ column }) => (
+                <DataTableColumnHeader column={column} title="Correo" />
+            ),
         },
         {
             accessorKey: "role",
-            header: "Perfil",
+            header: ({ column }) => (
+                <DataTableColumnHeader column={column} title="Perfil" />
+            ),
         },
         {
             id: "actions",
@@ -104,8 +159,8 @@ export default function Index({ usuarios }: UsuariosIndexPageProps) {
 
             <DeleteDialog />
 
-            <div className="">
-                <Card>
+            <div className="h-full flex-1 flex-col space-y-2 p-8 md:flex">
+                <Card className="">
                     <CardHeader>
                         <div className="flex items-center justify-between">
                             <CardTitle>
@@ -113,7 +168,11 @@ export default function Index({ usuarios }: UsuariosIndexPageProps) {
                                     Usuarios
                                 </h1>
                             </CardTitle>
-                            <Button>Nuevo usuario</Button>
+                            <Button onClick={() => setOpenModal(true)}>
+                                {/* <Link href={route("usuarios.create")}> */}
+                                    Nuevo Usuario
+                                {/* </Link> */}
+                            </Button>
                         </div>
                     </CardHeader>
                     <CardContent className="py-7">
@@ -123,6 +182,7 @@ export default function Index({ usuarios }: UsuariosIndexPageProps) {
                     </CardContent>
                 </Card>
             </div>
+            <CrearUsuarioForm open={openModal} onOpenChange={setOpenModal} />
         </AuthenticatedLayout>
     );
 }

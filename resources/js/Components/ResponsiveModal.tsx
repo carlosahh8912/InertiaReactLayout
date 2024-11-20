@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Dialog, DialogContent, DialogTitle } from "./ui/dialog";
 import { Drawer, DrawerContent, DrawerTitle } from "./ui/drawer";
+import { DialogDescription } from "@radix-ui/react-dialog";
 
 interface ResponsiveModalProps {
     children: React.ReactNode;
@@ -16,11 +17,11 @@ export const ResponsiveModal = ({
     onOpenChange,
 }: ResponsiveModalProps) => {
     const [isDesktop, setIsDesktop] = useState(
-        document.body.clientWidth > 768 ? true : false
+        document.body.clientWidth > 750 ? true : false
     );
 
     window.addEventListener("resize", function (event) {
-        setIsDesktop(document.body.clientWidth > 768 ? true : false);
+        setIsDesktop(document.body.clientWidth > 750 ? true : false);
     });
 
     if (isDesktop) {
@@ -28,6 +29,7 @@ export const ResponsiveModal = ({
             <Dialog open={open} onOpenChange={onOpenChange}>
                 <DialogContent className="w-full sm:max-w-lg p-0 border-none overflow-y-auto hide-scrollbar max-h-[85vh]">
                     <DialogTitle className="hidden"></DialogTitle>
+                    <DialogDescription />
                     {children}
                 </DialogContent>
             </Dialog>
