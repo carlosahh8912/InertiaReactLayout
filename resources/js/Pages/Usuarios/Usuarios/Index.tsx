@@ -33,7 +33,7 @@ interface UsuarioProps {
 }
 
 interface UsuariosIndexPageProps {
-    usuarios: UsuarioProps;
+    usuarios: [UsuarioProps];
 }
 
 export default function Index({ usuarios }: UsuariosIndexPageProps) {
@@ -65,7 +65,7 @@ export default function Index({ usuarios }: UsuariosIndexPageProps) {
                 toast.error("Error al eliminar el usuario", {
                     description: message,
                 });
-            }
+            },
         });
     };
 
@@ -170,7 +170,7 @@ export default function Index({ usuarios }: UsuariosIndexPageProps) {
                             </CardTitle>
                             <Button onClick={() => setOpenModal(true)}>
                                 {/* <Link href={route("usuarios.create")}> */}
-                                    Nuevo Usuario
+                                Nuevo Usuario
                                 {/* </Link> */}
                             </Button>
                         </div>
