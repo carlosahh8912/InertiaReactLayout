@@ -25,8 +25,8 @@ interface DataTableFacetedFilterProps<TData, TValue> {
     column?: Column<TData, TValue>;
     title?: string;
     options: {
-        label: string;
-        value: string;
+        name: string;
+        id: string;
         icon?: React.ComponentType<{ className?: string }>;
     }[];
 }
@@ -72,15 +72,15 @@ export function DataTableFacetedFilter<TData, TValue>({
                                 ) : (
                                     options
                                         .filter((option) =>
-                                            selectedValues.has(option.value)
+                                            selectedValues.has(option.name)
                                         )
                                         .map((option) => (
                                             <Badge
                                                 variant="secondary"
-                                                key={option.value}
+                                                key={option.name}
                                                 className="rounded-sm px-1 font-normal"
                                             >
-                                                {option.label}
+                                                {option.name}
                                             </Badge>
                                         ))
                                 )}
@@ -100,19 +100,19 @@ export function DataTableFacetedFilter<TData, TValue>({
                         <CommandGroup>
                             {options.map((option) => {
                                 const isSelected = selectedValues.has(
-                                    option.value
+                                    option.name
                                 );
                                 return (
                                     <CommandItem
-                                        key={option.value}
+                                        key={option.name}
                                         onSelect={() => {
                                             if (isSelected) {
                                                 selectedValues.delete(
-                                                    option.value
+                                                    option.name
                                                 );
                                             } else {
                                                 selectedValues.add(
-                                                    option.value
+                                                    option.name
                                                 );
                                             }
                                             const filterValues =
@@ -139,10 +139,10 @@ export function DataTableFacetedFilter<TData, TValue>({
                                         {option.icon && (
                                             <option.icon className="mr-2 h-4 w-4 text-muted-foreground" />
                                         )}
-                                        <span>{option.label}</span>
-                                        {facets?.get(option.value) && (
+                                        <span>{option.name}</span>
+                                        {facets?.get(option.name) && (
                                             <span className="ml-auto flex h-4 w-4 items-center justify-center font-mono text-xs">
-                                                {facets.get(option.value)}
+                                                {facets.get(option.name)}
                                             </span>
                                         )}
                                     </CommandItem>

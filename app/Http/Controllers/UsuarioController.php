@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateUserRequest;
+use App\Models\Role;
 use App\Models\User;
 use Exception;
 use Inertia\Inertia;
@@ -22,13 +24,31 @@ class UsuarioController extends Controller
                     'email' => $u->email,
                     'role' => $u->roles?->first()?->name
                 ]),
+                'roles' => Role::get(['id', 'name'])
             ]
         );
     }
 
-    public function create()
+    public function store(CreateUserRequest $request)
     {
-        return Inertia::render('Usuarios/Usuarios/Create');
+        try {
+
+            $usuario = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => $request->password,
+            ]);
+
+            if(!$usuario){
+                throw new Exception("Error al registrar al usuario, intentalo nuevamente");
+            }
+
+            $usuario->assignRole($request->role);
+
+            return back()->with('success', true);
+        } catch (Exception $e) {
+            return back()->withErrors($e->getMessage());
+        }
     }
 
     public function destroy(User $usuario)

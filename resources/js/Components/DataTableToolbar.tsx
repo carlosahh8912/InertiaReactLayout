@@ -13,26 +13,13 @@ import { TrashIcon } from "lucide-react";
 
 interface DataTableToolbarProps<TData> {
     table: Table<TData>;
+    data: TData[];
 }
 
-const DataFilter: any = [
-    {
-        value: "root",
-        label: "Root",
-    },
-    {
-        value: "Administrador",
-        label: "Administrador",
-    },
-    {
-        value: "Vendedor",
-        label: "Vendedor",
-    },
-];
-const categories: any = [];
 
 export function DataTableToolbar<TData>({
     table,
+    data
 }: DataTableToolbarProps<TData>) {
     const isFiltered = table.getState().columnFilters.length > 0;
 
@@ -63,18 +50,18 @@ export function DataTableToolbar<TData>({
                     }}
                     className="h-8 w-[150px] lg:w-[250px] "
                 />
-                {table.getColumn("email") && (
+                {/* {table.getColumn("email") && (
                     <DataTableFacetedFilter
                         column={table.getColumn("email")}
                         title="Correo"
                         options={categories}
                     />
-                )}
+                )} */}
                 {table.getColumn("role") && (
                     <DataTableFacetedFilter
                         column={table.getColumn("role")}
                         title="Perfil"
-                        options={DataFilter}
+                        options={data}
                     />
                 )}
                 {isFiltered && (

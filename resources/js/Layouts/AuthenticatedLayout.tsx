@@ -23,11 +23,11 @@ export default function Authenticated({
                 <Sidebar />
                 <SidebarInset>
                     <Navbar />
-                    <ScrollArea>
+                    {/* <ScrollArea> */}
                         <main className="mx-auto max-w-screen-2xl sm:p-8 pt-6 w-full h-full">
                             {children}
                         </main>
-                    </ScrollArea>
+                    {/* </ScrollArea> */}
                 </SidebarInset>
             </SidebarProvider>
         </div>

@@ -4,6 +4,7 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 
 import { Button } from "@/Components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/Components/ui/card";
+import PasswordInput from "@/Components/ui/input-password";
 
 const title = "Perfiles";
 
@@ -30,6 +31,8 @@ const Index = () => {
                     </CardHeader>
                     <CardContent className="py-7">
                         {/* <DataTable columns={ColumnsUsuario} data={roles} /> */}
+
+        <PasswordInput  />
                     </CardContent>
                 </Card>
             </div>

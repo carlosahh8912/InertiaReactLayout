@@ -24,19 +24,12 @@ import { toast } from "sonner";
 import CrearUsuarioForm from "./Partials/CrearUsuarioForm";
 import { useState } from "react";
 
-interface UsuarioProps {
-    id: string;
-    name: string;
-    email: string;
-    role: string;
-    // estatus: string;
-}
-
 interface UsuariosIndexPageProps {
-    usuarios: [UsuarioProps];
+    usuarios: UsuariosProps;
+    roles: RolesProps;
 }
 
-export default function Index({ usuarios }: UsuariosIndexPageProps) {
+export default function Index({ usuarios, roles }: UsuariosIndexPageProps) {
     const [openModal, setOpenModal] = useState(false);
 
     const {
@@ -70,32 +63,6 @@ export default function Index({ usuarios }: UsuariosIndexPageProps) {
     };
 
     const ColumnsUsuario: ColumnDef<UsuarioProps>[] = [
-        // {
-        //     id: "select",
-        //     header: ({ table }) => (
-        //         <Checkbox
-        //             checked={
-        //                 table.getIsAllPageRowsSelected() ||
-        //                 (table.getIsSomePageRowsSelected() && "indeterminate")
-        //             }
-        //             onCheckedChange={(value:any) =>
-        //                 table.toggleAllPageRowsSelected(!!value)
-        //             }
-        //             aria-label="Select all"
-        //             className="translate-y-0.5"
-        //         />
-        //     ),
-        //     cell: ({ row }) => (
-        //         <Checkbox
-        //             checked={row.getIsSelected()}
-        //             onCheckedChange={(value) => row.toggleSelected(!!value)}
-        //             aria-label="Select row"
-        //             className="translate-y-0.5"
-        //         />
-        //     ),
-        //     enableSorting: false,
-        //     enableHiding: false,
-        // },
         {
             accessorKey: "name",
             header: ({ column }) => (
@@ -159,6 +126,7 @@ export default function Index({ usuarios }: UsuariosIndexPageProps) {
 
             <DeleteDialog />
 
+
             <div className="h-full flex-1 flex-col space-y-2 p-8 md:flex">
                 <Card className="">
                     <CardHeader>
@@ -169,19 +137,21 @@ export default function Index({ usuarios }: UsuariosIndexPageProps) {
                                 </h1>
                             </CardTitle>
                             <Button onClick={() => setOpenModal(true)}>
-                                {/* <Link href={route("usuarios.create")}> */}
                                 Nuevo Usuario
-                                {/* </Link> */}
                             </Button>
                         </div>
                     </CardHeader>
                     <CardContent className="py-7">
-                        <DataTable columns={ColumnsUsuario} data={usuarios} />
+                        <DataTable
+                            columns={ColumnsUsuario}
+                            data={usuarios}
+                            toolbarData={roles}
+                        />
 
-                        {/* Your table content */}
                     </CardContent>
                 </Card>
             </div>
+
             <CrearUsuarioForm open={openModal} onOpenChange={setOpenModal} />
         </AuthenticatedLayout>
     );
