@@ -1,10 +1,9 @@
 <?php
 
-use App\Http\Controllers\PerfilController;
-use App\Http\Controllers\ProfileController;
+use Inertia\Inertia;
 
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
+use App\Http\Controllers\ProfileController;
 
 Route::get('/', function () {
     return Inertia::render('Welcome');
@@ -20,7 +19,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // Route::get('usuarios/usuarios/nuevo', [UsuarioController::class, "create"])->name('usuarios.create');
     // Route::delete('usuarios/usuarios/{usuario}/delete', [UsuarioController::class, "destroy"])->name('usuarios.destroy');
 
-    Route::get('usuarios/perfiles', [PerfilController::class, "index"])->name('perfiles.index');
+    Route::resource('usuarios/perfiles', \App\Http\Controllers\PerfilController::class)->only(['index']);
 
 
     Route::get('/test', function () {
